@@ -25,11 +25,11 @@ public class CrmService {
         this.statusRepository = statusRepository;
     }
 
-    public List<Contact> findAllContacts(String stringFilter) {
-        if (stringFilter == null || stringFilter.isEmpty()) {
+    public List<Contact> findAllContacts(String filterText) {
+        if (filterText == null || filterText.isEmpty()) {
             return contactRepository.findAll();
         } else {
-            return contactRepository.search(stringFilter);
+            return contactRepository.search(filterText);
         }
     }
 
