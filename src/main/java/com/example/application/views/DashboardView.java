@@ -11,6 +11,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import javax.annotation.security.PermitAll;
+
+@PermitAll
 @Route(value = "dashboard", layout = MainLayout.class)
 @PageTitle("Dashboard | Jeremy's CRM")
 public class DashboardView extends VerticalLayout {
@@ -36,8 +39,8 @@ public class DashboardView extends VerticalLayout {
     private Component getCompaniesChart() {
         Chart chart = new Chart(ChartType.PIE);
         DataSeries dataSeries = new DataSeries();
-        service.findAllCompanies().forEach(company ->
-                dataSeries.add(new DataSeriesItem(company.getName(), company.getEmployeeCount())));
+        service.findAllContacts().forEach(contact ->
+                dataSeries.add(new DataSeriesItem(String.valueOf(contact), 10)));
         chart.getConfiguration().setSeries(dataSeries);
 
         return chart;

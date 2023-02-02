@@ -14,8 +14,10 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import javax.annotation.security.PermitAll;
 import java.util.Collections;
 
+@PermitAll
 @PageTitle("Contacts | Jeremy's CRM")
 @Route(value = "", layout = MainLayout.class)
 public class ListView extends VerticalLayout {
@@ -60,7 +62,7 @@ public class ListView extends VerticalLayout {
     }
 
     private void configureForm() {
-        form = new ContactForm(service.findAllCompanies(),service.findAllStatuses());
+        form = new ContactForm(service.findAllContacts());
         form.setWidth("25em");
 
         form.addListener(ContactForm.SaveEvent.class,this::saveContact);
@@ -103,8 +105,8 @@ public class ListView extends VerticalLayout {
         grid.addClassName("contact-grid");
         grid.setSizeFull();
         grid.setColumns("firstName","lastName","email");
-        grid.addColumn(contact -> contact.getStatus().getName()).setHeader("Status");
-        grid.addColumn(contact -> contact.getCompany().getName()).setHeader("Company");
+        grid.addColumn(contact -> contact.getStatus()).setHeader("Status");
+        grid.addColumn(contact -> contact.getCompany()).setHeader("Company");
         grid.getColumns().forEach(col->col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(e -> editContact(e.getValue()));
