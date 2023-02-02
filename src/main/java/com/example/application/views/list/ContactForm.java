@@ -33,7 +33,8 @@ public class ContactForm extends FormLayout {
     Button save = new Button("Save");
     Button delete = new Button("Delete");
     Button cancel = new Button("Cancel");
-    Contact contact;
+    private Contact contact;
+
 
     public ContactForm(List<Company> companies, List<Status> statuses) {
         addClassName("contact-form");
@@ -58,6 +59,7 @@ public class ContactForm extends FormLayout {
     public void setContact(Contact contact){
         this.contact = contact;
         binder.readBean(contact); //the binder will read the bean (contact) and populate the UI fields (firstName,lastName, email, ....)
+
     }
     private Component createButtonLayout() {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
